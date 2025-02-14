@@ -1,0 +1,72 @@
+name: mca
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: ^3.6.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  dio: ^5.8.0+1
+  connectivity_plus: ^6.1.3
+  hooks_riverpod: ^2.6.1
+  riverpod_annotation: ^2.3.5
+  flutter_hooks: ^0.20.5
+  # get_it: ^8.0.3
+  gap: ^3.0.1
+  go_router: ^14.8.0
+
+  logs:
+    path: packages/logs
+    # git:
+    #   url: https://github.com/quochoang228/logs.git
+    #   ref: main
+  il:
+    path: packages/il
+    # git:
+    #   url: https://github.com/quochoang228/il.git
+    #   ref: main
+  ag:
+    path: packages/ag
+    # git:
+    #   url: https://github.com/quochoang228/ag.git
+    #   ref: main
+  cdn:
+    path: packages/cdn
+    # git:
+    #   url: https://github.com/quochoang228/cdn.git
+    #   ref: main
+  ds:
+    path: packages/ds
+    # git:
+    #   url: https://github.com/quochoang228/ds.git
+    #   ref: main
+  
+  di:
+    path: packages/di
+
+  persistent_storage:
+    path: packages/storage/persistent_storage
+    
+  utils:
+    path: packages/utils
+    
+  base_ui:
+    path: packages/base_ui
+    
+  auth:
+    path: packages/auth
+    
+  ioc_contact_request:
+    path: packages/ioc_contact_request
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
