@@ -1,32 +1,34 @@
-// State tổng hợp tất cả dữ liệu của contact detail page
-import '../../../ioc_contact_request.dart';
-import '../../entities/app_param.dart';
+part of '../../../ioc_contact_request.dart';
 
 class IocContactRequestDetailState {
-  final List<AppParam> groups;
-  final List<AppParam> paramGroups;
+  final List<AppParam> listBranch;
+  final List<AppParam> partnerGroup;
+  final List<AppParam> paramDataSources;
   final IocContactRequestB2B detail;
   final bool isLoading;
   final String? error;
 
   IocContactRequestDetailState({
-    required this.groups,
-    required this.paramGroups,
+    required this.listBranch,
+    required this.partnerGroup,
+    required this.paramDataSources,
     required this.detail,
     this.isLoading = false,
     this.error,
   });
 
   IocContactRequestDetailState copyWith({
-    List<AppParam>? groups,
-    List<AppParam>? paramGroups,
+    List<AppParam>? listBranch,
+    List<AppParam>? partnerGroup,
+    List<AppParam>? paramDataSources,
     IocContactRequestB2B? detail,
     bool? isLoading,
     String? error,
   }) {
     return IocContactRequestDetailState(
-      groups: groups ?? this.groups,
-      paramGroups: paramGroups ?? this.paramGroups,
+      listBranch: listBranch ?? this.listBranch,
+      partnerGroup: partnerGroup ?? this.partnerGroup,
+      paramDataSources: paramDataSources ?? this.paramDataSources,
       detail: detail ?? this.detail,
       isLoading: isLoading ?? this.isLoading,
       error: error ?? this.error,

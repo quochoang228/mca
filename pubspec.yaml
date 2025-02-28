@@ -9,6 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  intl:
 
   dio: ^5.8.0+1
   connectivity_plus: ^6.1.3
@@ -20,45 +21,54 @@ dependencies:
   go_router: ^14.8.0
 
   logs:
-    path: packages/logs
-    # git:
-    #   url: https://github.com/quochoang228/logs.git
-    #   ref: main
+     git:
+       url: https://github.com/quochoang228/logs.git
+       ref: main
   il:
-    path: packages/il
-    # git:
-    #   url: https://github.com/quochoang228/il.git
-    #   ref: main
+     git:
+       url: https://github.com/quochoang228/il.git
+       ref: main
   ag:
-    path: packages/ag
-    # git:
-    #   url: https://github.com/quochoang228/ag.git
-    #   ref: main
+     git:
+       url: https://github.com/quochoang228/ag.git
+       ref: main
   cdn:
-    path: packages/cdn
-    # git:
-    #   url: https://github.com/quochoang228/cdn.git
-    #   ref: main
+     git:
+       url: https://github.com/quochoang228/cdn.git
+       ref: main
   ds:
-    path: packages/ds
-    # git:
-    #   url: https://github.com/quochoang228/ds.git
-    #   ref: main
-  
+     git:
+       url: https://github.com/quochoang228/ds.git
+       ref: main
   di:
-    path: packages/di
+    git:
+      url: https://github.com/quochoang228/di.git
+      ref: main
+  router:
+    git:
+      url: https://github.com/quochoang228/router.git
+      ref: main
+  utils:
+    git:
+      url: https://github.com/quochoang228/utils.git
+      ref: main
+
+  storage:
+    git:
+      url: https://github.com/quochoang228/storage.git
+      path: storage
+      ref: main
 
   persistent_storage:
-    path: packages/storage/persistent_storage
-    
-  utils:
-    path: packages/utils
-    
-  base_ui:
-    path: packages/base_ui
-    
+    git:
+      url: https://github.com/quochoang228/storage.git
+      path: persistent_storage
+      ref: main
+
   auth:
-    path: packages/auth
+    git:
+      url: https://github.com/quochoang228/auth.git
+      ref: main
     
   ioc_contact_request:
     path: packages/ioc_contact_request

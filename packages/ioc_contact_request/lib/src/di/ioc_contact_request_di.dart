@@ -34,5 +34,19 @@ class IOCContactRequestDependency implements BaseDependencies {
     Dependencies().registerLazySingleton<IOCContactRequestService>(
       () => IOCContactRequestService(Dependencies().getIt()),
     );
+
+    IocContactRequestRouter().init();
+
+    // Dependencies().registerLazySingleton<IocContactRequestRouter>(
+    //   () => IocContactRequestRouter(),
+    // );
+    //
+    // Dependencies().getIt<RouterService>().registerRoute(
+    //   RouteEntry(
+    //     path: IOCContactRequestService.iocContactRequest,
+    //     protected: true,
+    //     builder: (context) => const IocContactRequestPage(),
+    //   ),
+    // );
   }
 }

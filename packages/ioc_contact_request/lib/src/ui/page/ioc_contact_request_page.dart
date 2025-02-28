@@ -4,86 +4,151 @@ class IocContactRequestPage extends StatefulHookConsumerWidget {
   const IocContactRequestPage({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() =>
-      _IocContactRequestPageState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _IocContactRequestPageState();
 }
 
 class _IocContactRequestPageState extends ConsumerState<IocContactRequestPage> {
   @override
+  void initState() {
+    setUpData();
+    super.initState();
+  }
+
+  void setUpData() {
+    Future(() {
+      ref.read(iocContactRequestProvider.notifier).getListContactB2B(0);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'IOC YCTX',
-          style: BaseStyle.titleMedium.semiBold(),
-        ),
-      ),
-      body: ListView.separated(
-        padding: EdgeInsets.symmetric(
-          vertical: BaseSpacing.spacing2,
-          horizontal: BaseSpacing.spacing4,
-        ),
-        itemBuilder: (context, index) {
-          return Container(
-            padding: EdgeInsets.symmetric(
-              vertical: BaseSpacing.spacing2,
-              horizontal: BaseSpacing.spacing4,
-            ),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(BaseRadius.radiusMd),
-              border: Border.all(
-                color: CoreColors.neutral02,
-              ),
-            ),
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Mã YCTX',
-                      style: BaseStyle.labelMedium.regular(),
-                    ),
-                    Text(
-                      'FHODSHJ489239483',
-                      style: BaseStyle.labelMedium,
-                    ),
-                  ],
-                ),
-                const Gap(BaseSpacing.spacing2),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Người tạo',
-                      style: BaseStyle.labelMedium.regular(),
-                    ),
-                    Text(
-                      'Hoàng Tiến Quốc',
-                      style: BaseStyle.labelMedium,
-                    ),
-                  ],
-                ),
-                const Gap(BaseSpacing.spacing2),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text('Trạng thái', style: BaseStyle.labelMedium.regular()),
-                    Text(
-                      'Đã tạo',
-                      style: BaseStyle.labelMedium.applyColor(
-                        BaseColors.success,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          );
+    return Layout(
+      title: 'Yêu cầu tiếp xúc B2B',
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // Navigator.of(context).pushNamed(Routes.iocContactRequestCreatePage);
         },
-        separatorBuilder: (context, index) => const Gap(BaseSpacing.spacing2),
-        itemCount: 16,
+        child: const Icon(Icons.add),
       ),
+      body: ref.watch(iocContactRequestProvider).match(
+            notLoaded: (_) => const SizedBox(),
+            loading: (_) => const ListLoading(),
+            noData: (_) => const BaseEmptyState(),
+            failed: (error) => BaseEmptyState(
+              title: error.error.message ?? '',
+            ),
+            fetched: (data) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  // Container(
+                  //   padding: const EdgeInsets.symmetric(
+                  //     vertical: DSSpacing.spacing25,
+                  //     horizontal: DSSpacing.spacing4,
+                  //   ),
+                  //   color: DSColors.backgroundWhite,
+                  //   child: Text(
+                  //     '${data.data.length} yêu cầu tiếp xúc',
+                  //     style: DSTextStyle.headlineMedium,
+                  //   ),
+                  // ),
+                  Expanded(
+                    child: ListView.separated(
+                      itemCount: data.data.length,
+                      separatorBuilder: (context, index) => const Gap(DSSpacing.spacing2),
+                      padding: const EdgeInsets.symmetric(vertical: DSSpacing.spacing2),
+                      itemBuilder: (context, index) {
+                        var item = data.data[index];
+                        return InkWell(
+                          onTap: () {
+                            context.push(IOCContactRequestService.iocContactRequestDetail, extra: item);
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.all(DSSpacing.spacing4),
+                            decoration: BoxDecoration(
+                              color: DSColors.backgroundWhite,
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                Text(
+                                  item.tangentCode ?? '',
+                                  style: DSTextStyle.labelMedium,
+                                ),
+                                const Gap(DSSpacing.spacing2),
+                                Text(
+                                  'Tạo bởi: Đặng Quốc Huy - 454151 - 0347000678',
+                                  style: DSTextStyle.captionMedium.applyColor(DSColors.textSubtitle),
+                                ),
+                                const Gap(DSSpacing.spacing3),
+                                Row(
+                                  children: [
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        color: DSColors.backgroundGray,
+                                        border: Border.all(
+                                          color: DSColors.borderDivider,
+                                        ),
+                                        borderRadius: BorderRadius.circular(DSSpacing.spacing2),
+                                      ),
+                                      padding: EdgeInsets.symmetric(
+                                        vertical: DSSpacing.spacing4 + 2,
+                                        horizontal: DSSpacing.spacing2,
+                                      ),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Text(
+                                            item.endDate?.getFormat(pattern: 'EEEE') ?? '',
+                                            style: DSTextStyle.headlineMedium,
+                                          ),
+                                          Container(
+                                            color: DSColors.borderDefault,
+                                            height: 1,
+                                            width: 24,
+                                          ),
+                                          Text(item.endDate?.getFormat(pattern: 'd') ?? '', style: DSTextStyle.headlineLarge),
+                                          Text(item.endDate?.getFormat(pattern: 'MMMM') ?? '', style: DSTextStyle.headlineSmall),
+                                        ],
+                                      ),
+                                    ),
+                                    const Gap(DSSpacing.spacing2),
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Text(
+                                            item.stateStr ?? '',
+                                            style: DSTextStyle.bodySmall.applyColor(DSColors.warning),
+                                          ),
+                                          const Gap(DSSpacing.spacing1),
+                                          Text(
+                                            item.customerName ?? '',
+                                            style: DSTextStyle.bodySmall.applyColor(DSColors.textLabel),
+                                          ),
+                                          const Gap(DSSpacing.spacing1),
+                                          Text(
+                                            item.address ?? '',
+                                            style: DSTextStyle.bodySmall.applyColor(DSColors.textLabel),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              );
+            },
+          ),
     );
   }
 }

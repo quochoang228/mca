@@ -1,8 +1,27 @@
-// part of '../../auth.dart';
+part of '../../../ioc_contact_request.dart';
 
-// class AuthRouter {
-//   static final GoRoute route = GoRoute(
-//     path: '/login',
-//     builder: (context, state) => LoginPage(),
-//   );
-// }
+class IocContactRequestRouter {
+  init() {
+    Dependencies().registerLazySingleton<IocContactRequestRouter>(
+      () => IocContactRequestRouter(),
+    );
+
+    Dependencies().getIt<RouterService>().registerRoute(
+          RouteEntry(
+            path: IOCContactRequestService.iocContactRequest,
+            protected: true,
+            builder: (context, state) => const IocContactRequestPage(),
+          ),
+        );
+
+    Dependencies().getIt<RouterService>().registerRoute(
+          RouteEntry(
+            path: IOCContactRequestService.iocContactRequestDetail,
+            protected: true,
+            builder: (context, state) => IocContactRequestDetailPage(
+              contactRequest: state.extra as IocContactRequestB2B,
+            ),
+          ),
+        );
+  }
+}

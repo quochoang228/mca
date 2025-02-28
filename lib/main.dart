@@ -1,12 +1,15 @@
 import 'package:ag/ag.dart';
+import 'package:auth/auth.dart';
 import 'package:di/di.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:logs/logs.dart';
 import 'package:persistent_storage/persistent_storage.dart';
+import 'package:router/router.dart';
 import 'package:utils/utils.dart';
+
+import 'package:intl/date_symbol_data_local.dart';
 
 import 'di/inject.dart';
 import 'router/router_config.dart';
@@ -22,6 +25,11 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+          appBarTheme: AppBarTheme(
+        backgroundColor: Colors.white,
+        scrolledUnderElevation: 0.0,
+      )),
       home: Scaffold(
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -39,9 +47,7 @@ class MainApp extends StatelessWidget {
                 }
               },
               child: Text(
-                '0966767516'.validatePhone()
-                    ? "Phonenumber"
-                    : 'Not Phonenumber',
+                '0966767516'.validatePhone() ? "Phonenumber" : 'Not Phonenumber',
               ),
             ),
             ElevatedButton(
@@ -77,6 +83,7 @@ class MyApp extends StatelessWidget {
   final TransitionBuilder builder;
   final ThemeData? themeData;
   final RouterConfig<Object>? routerConfig;
+
   // final Iterable<LocalizationsDelegate<dynamic>>? localizationsDelegates;
   // final Iterable<Locale> supportedLocales;
 
@@ -94,26 +101,54 @@ class MyApp extends StatelessWidget {
 }
 
 Future<void> main() async {
+  injectorRouterApp();
+
   bootstrap(
-    app: ProviderScope(
-      child: MyApp(
-        builder: (context, child) {
-          return child!;
-        },
-        // supportedLocales: AppLocalizations.supportedLocales,
-        // localizationsDelegates: AppLocalizations.localizationsDelegates,
-        routerConfig: AppRouter.configuration,
-        themeData: ThemeData(
-            // appBarTheme: AppBarTheme(
-            //   backgroundColor: CoreColors.transparent,
-            //   scrolledUnderElevation: 0.0,
-            //   systemOverlayStyle: SystemUiOverlayStyle.light,
-            // ),
-            // brightness: Brightness.light,
-            // useMaterial3: true,
+    app: ListenableBuilder(
+      listenable: Dependencies().getIt<RouterService>(),
+      builder: (context, child) {
+        return  ProviderScope(
+          child: MyApp(
+            builder: (context, child) {
+              return child!;
+            },
+            // supportedLocales: AppLocalizations.supportedLocales,
+            // localizationsDelegates: AppLocalizations.localizationsDelegates,
+            routerConfig: Dependencies().getIt<RouterService>().router,
+            // routerConfig: AppRouter.configuration,
+            themeData: ThemeData(
+              // appBarTheme: AppBarTheme(
+              //   backgroundColor: CoreColors.transparent,
+              //   scrolledUnderElevation: 0.0,
+              //   systemOverlayStyle: SystemUiOverlayStyle.light,
+              // ),
+              // brightness: Brightness.light,
+              // useMaterial3: true,
             ),
-      ),
+          ),
+        );
+      },
     ),
+    // app: ProviderScope(
+    //   child: MyApp(
+    //     builder: (context, child) {
+    //       return child!;
+    //     },
+    //     // supportedLocales: AppLocalizations.supportedLocales,
+    //     // localizationsDelegates: AppLocalizations.localizationsDelegates,
+    //     routerConfig: Dependencies().getIt<RouterService>().router,
+    //     // routerConfig: AppRouter.configuration,
+    //     themeData: ThemeData(
+    //         // appBarTheme: AppBarTheme(
+    //         //   backgroundColor: CoreColors.transparent,
+    //         //   scrolledUnderElevation: 0.0,
+    //         //   systemOverlayStyle: SystemUiOverlayStyle.light,
+    //         // ),
+    //         // brightness: Brightness.light,
+    //         // useMaterial3: true,
+    //         ),
+    //   ),
+    // ),
   );
 }
 
@@ -121,6 +156,8 @@ Future<void> bootstrap({
   required Widget app,
 }) async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await initializeDateFormatting();
 
   // set orientations
   preferredOrientations();
@@ -133,6 +170,10 @@ Future<void> bootstrap({
 
   // Dependencies
   injectorApp();
+
+  var token = await Dependencies().getIt<AuthService>().fetchToken();
+
+  await Dependencies().getIt<ApiGateway>().setToken(token ?? '');
 
   runApp(
     ProviderScope(

@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:base_ui/base_ui.dart';
+import 'package:ds/ds.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
@@ -76,7 +76,7 @@ class _SplashState extends ConsumerState<SplashPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: CoreColors.white,
+      backgroundColor: DSCoreColors.white,
       // appBar: AppBar(
       //   backgroundColor: JobbyColors.gray900,
       // ),
@@ -84,7 +84,7 @@ class _SplashState extends ConsumerState<SplashPage> {
         child: Text(
           'Super App Nội Bộ',
           style: TextStyle(
-            color: CoreColors.black,
+            color: DSCoreColors.black,
             fontSize: 40,
             fontWeight: FontWeight.w700,
           ),
