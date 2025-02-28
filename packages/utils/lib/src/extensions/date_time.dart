@@ -67,4 +67,8 @@ extension DateOnlyCompare on DateTime {
   bool get isWeekend {
     return weekday == 6 || weekday == 7;
   }
+
+  getFormat({String? pattern, String? locale = 'vi'}) {
+    return DateFormat(pattern, locale).format(toLocal());
+  }
 }
