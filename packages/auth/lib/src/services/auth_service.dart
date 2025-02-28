@@ -5,6 +5,8 @@ class AuthService {
 
   AuthService(this._authRepository);
 
+  static String loginRouter = '/login-page';
+
   Future<bool> isLoggedIn() => _authRepository.isLoggedIn();
 
   String?
@@ -57,4 +59,15 @@ class AuthService {
   Future<String?> fetchToken() => _authRepository.fetchToken();
 
   Future<bool> logout() => _authRepository.logOut();
+
+  Future<User?> getUser() async {
+    final token = await fetchToken();
+    if (token == null) return null;
+    final parseToken = JwtDecoder.decode(token);
+    return User.fromJson(parseToken);
+  }
+
+  User? get user => getUser() as User;
+
+  Future<void> setToken(String token) => _authRepository.setToken(token);
 }

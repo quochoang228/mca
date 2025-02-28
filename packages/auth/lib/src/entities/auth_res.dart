@@ -2,15 +2,15 @@ part of '../../../auth.dart';
 
 class AuthResponse {
   final String? token;
-  final int? expiresIn;
-  final int? expiresTime;
-  final String? refreshToken;
+  final int? status;
+  final String? message;
+  final bool? success;
 
   AuthResponse({
     this.token,
-    this.expiresIn,
-    this.expiresTime,
-    this.refreshToken,
+    this.status,
+    this.message,
+    this.success,
   });
 
   factory AuthResponse.fromRawJson(String str) => AuthResponse.fromJson(json.decode(str));
@@ -19,15 +19,15 @@ class AuthResponse {
 
   factory AuthResponse.fromJson(Map<String, dynamic> json) => AuthResponse(
         token: json["token"],
-        expiresIn: json["expiresIn"],
-        expiresTime: json["expiresTime"],
-        refreshToken: json["refreshToken"],
+        status: json["status"],
+        message: json["message"],
+        success: json["success"],
       );
 
   Map<String, dynamic> toJson() => {
         "token": token,
-        "expiresIn": expiresIn,
-        "expiresTime": expiresTime,
-        "refreshToken": refreshToken,
+        "status": status,
+        "message": message,
+        "success": success,
       };
 }

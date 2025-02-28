@@ -23,13 +23,19 @@ dependencies:
     git:
       url: https://github.com/quochoang228/logs.git
       ref: main
-
-  base_ui:
-    path: ../base_ui
   ag:
     path: ../ag
   di:
     path: ../di
+
+  router:
+    path: ../router
+
+  ds:
+    path: ../ds
+    # git:
+    #   url: https://github.com/quochoang228/ds.git
+    #   ref: main
     
   utils:
     path: ../utils

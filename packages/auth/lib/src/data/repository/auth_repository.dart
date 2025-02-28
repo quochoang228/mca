@@ -1,7 +1,7 @@
 part of '../../../auth.dart';
 
 abstract class AuthRepository {
-  Future<BaseResult<DataResponse<AuthResponse>>> login({
+  Future<BaseResult<AuthResponse>> login({
     required String url,
     required Map<String, dynamic> request,
   });
@@ -26,7 +26,7 @@ class AuthRepositoryImpl extends BaseRepository implements AuthRepository {
   final AuthLocalStorage _profileStorage;
 
   @override
-  Future<BaseResult<DataResponse<AuthResponse>>> login({
+  Future<BaseResult<AuthResponse>> login({
     required String url,
     required Map<String, dynamic> request,
   }) async {
@@ -34,10 +34,11 @@ class AuthRepositoryImpl extends BaseRepository implements AuthRepository {
       return await safeApiCall(
         _authApi.login(url: url, request: request),
         mapper: (data) {
-          return DataResponse<AuthResponse>.fromJson(
-            data,
-            (Object? obj) => AuthResponse.fromJson(obj as Map<String, dynamic>),
-          );
+          return AuthResponse.fromJson(data);
+          // return DataResponse<AuthResponse>.fromJson(
+          //   data,
+          //   (Object? obj) => AuthResponse.fromJson(obj as Map<String, dynamic>),
+          // );
         },
       );
     } catch (error, stackTrace) {
