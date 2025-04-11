@@ -1,0 +1,2 @@
+D:/HoangTienQuoc/mca/android/app/.cxx/Debug/w3u2f6m2/x86/CMakeFiles/edit_cache.dir
+D:/HoangTienQuoc/mca/android/app/.cxx/Debug/w3u2f6m2/x86/CMakeFiles/rebuild_cache.dir

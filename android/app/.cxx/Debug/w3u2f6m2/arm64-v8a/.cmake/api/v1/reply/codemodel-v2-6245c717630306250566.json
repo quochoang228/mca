@@ -1,0 +1,43 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.6.0"
+					},
+					"projectIndex" : 0,
+					"source" : "."
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "Project"
+				}
+			],
+			"targets" : []
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "D:/HoangTienQuoc/mca/android/app/.cxx/Debug/w3u2f6m2/arm64-v8a",
+		"source" : "D:/HoangTienQuoc/Code/flutter_windows_3.7.2-stable/flutter/packages/flutter_tools/gradle/src/main/groovy"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}

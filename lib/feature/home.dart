@@ -1,3 +1,4 @@
+import 'package:ag/ag.dart';
 import 'package:auth/auth.dart';
 import 'package:di/di.dart';
 import 'package:ds/ds.dart';
@@ -91,7 +92,7 @@ class _HomeState extends ConsumerState<Home> {
             DSButton(
               label: 'Yêu cầu tiếp xúc',
               onPressed: () {
-                context.push(IOCContactRequestService.iocContactRequest);
+                context.push(IOCContactRequestService.iocContactRequestType);
               },
             ),
             const Gap(DSSpacing.spacing4),
@@ -105,6 +106,7 @@ class _HomeState extends ConsumerState<Home> {
             DSButton(
               label: 'Log Out',
               onPressed: () async {
+                await Dependencies().getIt<ApiGateway>().setToken('');
                 var data = await Dependencies().getIt<AuthService>().logout();
                 if (data) {
                   // DSNormalToast.showSuccess(

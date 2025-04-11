@@ -18,6 +18,14 @@ abstract class IOCContactRequestApi {
   Future<Response> getAppParamByParType({
     required Map<String, dynamic> request,
   });
+
+  Future<Response> getListContactB2C({
+    required Map<String, dynamic> request,
+  });
+
+  Future<Response> getContactDetailB2C({
+    required Map<String, dynamic> request,
+  });
 }
 
 class IOCContactRequestApiImpl implements IOCContactRequestApi {
@@ -67,6 +75,27 @@ class IOCContactRequestApiImpl implements IOCContactRequestApi {
     return _apiGateway.post(
       '/common/getAppParamByParType',
       data: request,
+    );
+  }
+
+
+  @override
+  Future<Response> getListContactB2C({
+    required Map<String, dynamic> request,
+  }) {
+    return _apiGateway.post(
+      '/contact/search',
+      data: request,
+    );
+  }
+
+  @override
+  Future<Response> getContactDetailB2C({
+    required Map<String, dynamic> request,
+  }) {
+    return _apiGateway.get(
+      '/contact/findById',
+      queryParameters: request,
     );
   }
 }

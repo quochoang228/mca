@@ -8,6 +8,14 @@ class IocContactRequestRouter {
 
     Dependencies().getIt<RouterService>().registerRoute(
           RouteEntry(
+            path: IOCContactRequestService.iocContactRequestType,
+            protected: true,
+            builder: (context, state) => const IocContactRequestType(),
+          ),
+        );
+
+    Dependencies().getIt<RouterService>().registerRoute(
+          RouteEntry(
             path: IOCContactRequestService.iocContactRequest,
             protected: true,
             builder: (context, state) => const IocContactRequestPage(),
@@ -16,10 +24,38 @@ class IocContactRequestRouter {
 
     Dependencies().getIt<RouterService>().registerRoute(
           RouteEntry(
+            path: IOCContactRequestService.iocContactRequestB2C,
+            protected: true,
+            builder: (context, state) => IocContactRequestB2CPage(),
+          ),
+        );
+
+    Dependencies().getIt<RouterService>().registerRoute(
+          RouteEntry(
             path: IOCContactRequestService.iocContactRequestDetail,
             protected: true,
             builder: (context, state) => IocContactRequestDetailPage(
-              contactRequest: state.extra as IocContactRequestB2B,
+              contactRequest: state.extra as IocContactRequest,
+            ),
+          ),
+        );
+
+    Dependencies().getIt<RouterService>().registerRoute(
+          RouteEntry(
+            path: IOCContactRequestService.iocContactRequestB2CDetail,
+            protected: true,
+            builder: (context, state) => IocContactRequestB2CDetailPage(
+              contactRequest: state.extra as IocContactRequest,
+            ),
+          ),
+        );
+
+    Dependencies().getIt<RouterService>().registerRoute(
+          RouteEntry(
+            path: IOCContactRequestService.iocContactRequestB2CAI,
+            protected: true,
+            builder: (context, state) => AIContactRequestB2c(
+              tangentCustomerId: state.extra as int,
             ),
           ),
         );

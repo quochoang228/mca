@@ -1,11 +1,11 @@
 part of '../../../ioc_contact_request.dart';
 
 abstract class IOCContactRequestRepository {
-  Future<BaseResult<ListDataResponse<IocContactRequestB2B>>> getListContactB2B({
+  Future<BaseResult<ListDataResponse<IocContactRequest>>> getListContactB2B({
     required Map<String, dynamic> request,
   });
 
-  Future<BaseResult<DataResponse<IocContactRequestB2B>>> getContactDetailB2B({
+  Future<BaseResult<DataResponse<IocContactRequest>>> getContactDetailB2B({
     required Map<String, dynamic> request,
   });
 
@@ -20,6 +20,14 @@ abstract class IOCContactRequestRepository {
   });
 
   Future<void> setValue(String value);
+
+  Future<BaseResult<ListDataResponse<IocContactRequest>>> getListContactB2C({
+    required Map<String, dynamic> request,
+  });
+
+  Future<BaseResult<DataResponse<IocContactRequest>>> getContactDetailB2C({
+    required Map<String, dynamic> request,
+  });
 }
 
 class IOCContactRequestRepositoryImpl extends BaseRepository implements IOCContactRequestRepository {
@@ -33,16 +41,16 @@ class IOCContactRequestRepositoryImpl extends BaseRepository implements IOCConta
   final IOCContactRequestLocalStorage _localStorage;
 
   @override
-  Future<BaseResult<ListDataResponse<IocContactRequestB2B>>> getListContactB2B({
+  Future<BaseResult<ListDataResponse<IocContactRequest>>> getListContactB2B({
     required Map<String, dynamic> request,
   }) async {
     try {
       return await safeApiCall(
         _api.getListContactB2B(request: request),
         mapper: (data) {
-          return ListDataResponse<IocContactRequestB2B>.fromJson(
+          return ListDataResponse<IocContactRequest>.fromJson(
             data,
-            (Object? obj) => IocContactRequestB2B.fromMap(obj as Map<String, dynamic>),
+            (Object? obj) => IocContactRequest.fromMap(obj as Map<String, dynamic>),
           );
         },
       );
@@ -52,16 +60,16 @@ class IOCContactRequestRepositoryImpl extends BaseRepository implements IOCConta
   }
 
   @override
-  Future<BaseResult<DataResponse<IocContactRequestB2B>>> getContactDetailB2B({
+  Future<BaseResult<DataResponse<IocContactRequest>>> getContactDetailB2B({
     required Map<String, dynamic> request,
   }) async {
     try {
       return await safeApiCall(
         _api.getContactDetailB2B(request: request),
         mapper: (data) {
-          return DataResponse<IocContactRequestB2B>.fromJson(
+          return DataResponse<IocContactRequest>.fromJson(
             data,
-            (Object? obj) => IocContactRequestB2B.fromMap(obj as Map<String, dynamic>),
+            (Object? obj) => IocContactRequest.fromMap(obj as Map<String, dynamic>),
           );
         },
       );
@@ -122,6 +130,44 @@ class IOCContactRequestRepositoryImpl extends BaseRepository implements IOCConta
           return ListDataResponse<AppParam>.fromJson(
             data,
             (Object? obj) => AppParam.fromJson(obj as Map<String, dynamic>),
+          );
+        },
+      );
+    } catch (error, stackTrace) {
+      Error.throwWithStackTrace(error, stackTrace);
+    }
+  }
+
+  @override
+  Future<BaseResult<ListDataResponse<IocContactRequest>>> getListContactB2C({
+    required Map<String, dynamic> request,
+  }) async {
+    try {
+      return await safeApiCall(
+        _api.getListContactB2C(request: request),
+        mapper: (data) {
+          return ListDataResponse<IocContactRequest>.fromJson(
+            data,
+            (Object? obj) => IocContactRequest.fromMap(obj as Map<String, dynamic>),
+          );
+        },
+      );
+    } catch (error, stackTrace) {
+      Error.throwWithStackTrace(error, stackTrace);
+    }
+  }
+
+  @override
+  Future<BaseResult<DataResponse<IocContactRequest>>> getContactDetailB2C({
+    required Map<String, dynamic> request,
+  }) async {
+    try {
+      return await safeApiCall(
+        _api.getContactDetailB2C(request: request),
+        mapper: (data) {
+          return DataResponse<IocContactRequest>.fromJson(
+            data,
+                (Object? obj) => IocContactRequest.fromMap(obj as Map<String, dynamic>),
           );
         },
       );
