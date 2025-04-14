@@ -2,7 +2,6 @@ import 'package:ag/ag.dart';
 import 'package:cdn/cdn.dart';
 import 'package:ds/ds.dart';
 import 'package:di/di.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -21,9 +20,17 @@ import 'package:auth/auth.dart';
 
 import 'package:intl/intl.dart';
 
-import 'src/modules/b2c/page/ai_contact_request_b2c.dart';
 import 'src/modules/b2c/widgets/a.dart';
 import 'src/modules/b2c/widgets/form_contact_info.dart';
+
+import 'dart:io';
+
+import 'package:cdn/gen/assets.gen.dart';
+import 'package:image_picker/image_picker.dart';
+
+import '../../../../ioc_contact_request.dart';
+import 'src/modules/house_model/enum/architectural_design_enum.dart';
+import 'src/modules/house_model/widget/dot.dart';
 
 /// part --
 
@@ -71,4 +78,7 @@ part 'src/modules/b2c/state/ioc_request_contact_b2c_detail_state.dart';
 part 'src/modules/b2c/state/option.dart';
 part 'src/modules/b2c/state/ai_ioc_request_contact_b2c_state.dart';
 part 'src/modules/b2c/provider/ai_ioc_contact_request_b2c_provider.dart';
+
+
+part 'src/modules/house_model/page/house_model_page.dart';
 

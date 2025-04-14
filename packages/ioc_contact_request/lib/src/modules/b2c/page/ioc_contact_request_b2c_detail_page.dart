@@ -317,7 +317,7 @@ class _IocContactRequestB2CDetailPageState
                     icon: Icon(Icons.lens_blur_outlined),
                     onPressed: () {
                       context.push(
-                        IOCContactRequestService.iocContactRequestB2CAI,
+                        IOCContactRequestService.iocContactRequestHouseModel,
                         extra:
                             iocContactRequestB2CDetail.detail.tangentCustomerId,
                       );

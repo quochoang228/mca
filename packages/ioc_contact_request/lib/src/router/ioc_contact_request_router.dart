@@ -52,9 +52,9 @@ class IocContactRequestRouter {
 
     Dependencies().getIt<RouterService>().registerRoute(
           RouteEntry(
-            path: IOCContactRequestService.iocContactRequestB2CAI,
+            path: IOCContactRequestService.iocContactRequestHouseModel,
             protected: true,
-            builder: (context, state) => AIContactRequestB2c(
+            builder: (context, state) => HouseModelPage(
               tangentCustomerId: state.extra as int,
             ),
           ),

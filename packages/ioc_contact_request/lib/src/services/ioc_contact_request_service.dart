@@ -12,5 +12,7 @@ class IOCContactRequestService {
   /// b2c
   static String iocContactRequestB2C = '/ioc-contact-request-b2c';
   static String iocContactRequestB2CDetail = '/ioc-contact-request-b2c-detail';
-  static String iocContactRequestB2CAI = '/ioc-contact-request-b2c-ai';
+
+  static String iocContactRequestHouseModel =
+      '/ioc-contact-request-house-model';
 }
