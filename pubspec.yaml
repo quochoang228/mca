@@ -73,6 +73,9 @@ dependencies:
   ioc_contact_request:
     path: packages/ioc_contact_request
 
+  vcc:
+    path: ../b2c_mobile
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

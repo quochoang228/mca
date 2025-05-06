@@ -6,6 +6,7 @@ import 'package:di/di.dart';
 import 'package:ioc_contact_request/ioc_contact_request.dart';
 import 'package:mca/feature/home.dart';
 import 'package:router/router.dart';
+import 'package:vcc/app_configs/app.dart';
 
 import '../feature/about.dart';
 import '../feature/settings.dart';
@@ -75,6 +76,12 @@ void injectorRouterApp() {
     RouteEntry(
       path: Paths.settings,
       builder: (context, state) => const SettingsPage(),
+    ),
+
+
+    RouteEntry(
+      path: Paths.b2C,
+      builder: (context, state) => const MyApp(),
     ),
     // RouteEntry(
     //   path: Paths.iocContactRequest,

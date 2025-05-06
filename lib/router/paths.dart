@@ -12,4 +12,8 @@ abstract class Paths {
 
   ///--Không yêu cầu đăng nhập---///
   static const String about = '/about';
+
+
+  ///--Không yêu cầu đăng nhập---///
+  static const String b2C = '/b2c';
 }

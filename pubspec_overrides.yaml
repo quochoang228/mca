@@ -3,3 +3,11 @@ dependency_overrides:
     git:
       url: https://github.com/quochoang228/logs.git
       ref: main
+  persistent_storage:
+    git:
+      url: https://github.com/quochoang228/storage.git
+      path: persistent_storage
+      ref: main
+  get_it: ^8.0.3
+  wolt_modal_sheet: ^0.11.0
+  web: ^1.1.1
